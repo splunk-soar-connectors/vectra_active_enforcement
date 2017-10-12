@@ -1,5 +1,5 @@
 {
-    "appid": "9c7d7fe8-4b61-4a38-aead-bed066c85633",
+    "appid": "d0661b48-cae3-496c-af6f-1bb566ed4916",
     "name": "Vectra Active Enforcement",
     "description": "Vectra Active Enforcement",
     "type": "information",
@@ -13,7 +13,7 @@
     "utctime_updated": "2017-08-30T02:37:10.597447Z",
     "package_name": "phantom_vectraactiveenforcement",
     "main_module": "vectraactiveenforcement_connector.pyc",
-    "min_phantom_version": "3.0.247",
+    "min_phantom_version": "3.0.251",
     "app_wizard_version": "1.0.0",
     "configuration": {
         "device": {
