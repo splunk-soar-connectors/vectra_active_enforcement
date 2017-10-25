@@ -77,10 +77,10 @@ class VectraDetection:
         }
 
 
-def create_container(name, identifier, artifact, severity):
+def create_container(name, label, identifier, artifact, severity):
     container_doc = {
         "description": "Automation container for hosts identified by Vectra appliance",
-        "label": "events",
+        "label": label,
         "name": name,
         "run_automation": True,
         "severity": severity,

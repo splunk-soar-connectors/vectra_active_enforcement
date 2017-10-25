@@ -272,7 +272,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
         artifact = create_artifact(host, 'block', config['severity'])
 
         container_ret_val, message, self._block_container_id = self.save_container(
-            create_container(name, identifier, artifact, config['severity'])
+            create_container(name, config['ingest']['container_label'], identifier, artifact, config['severity'])
         )
         self.save_progress("Successfully saved container: {}".format(self._block_container_id))
         return
@@ -296,7 +296,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
         }
 
         container_ret_val, message, self._block_container_id = self.save_container(
-            create_container(name, identifier, artifact, config['severity'])
+            create_container(name, config['ingest']['container_label'], identifier, artifact, config['severity'])
         )
 
         self.save_progress("Successfully unblocked {}".format(host[0]))
