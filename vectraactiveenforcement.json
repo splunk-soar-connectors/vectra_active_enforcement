@@ -9,8 +9,8 @@
     "product_version_regex": ".*",
     "publisher": "Vectra",
     "license": "Copyright Vectra 2017",
-    "app_version": "3.0.1",
-    "utctime_updated": "2017-08-30T02:37:10.597447Z",
+    "app_version": "3.0.2",
+    "utctime_updated": "2017-11-30T22:44:57.000000Z",
     "package_name": "phantom_vectraactiveenforcement",
     "main_module": "vectraactiveenforcement_connector.pyc",
     "min_phantom_version": "3.0.251",
@@ -178,7 +178,7 @@
                     "column_name": "id",
                     "column_order": 0
                 },
-                                {
+                {
                     "data_path": "action_result.data.*.*.state",
                     "data_type": "string",
                     "column_name": "state",
@@ -300,7 +300,7 @@
                 "dettypes": {
                     "description": "Detection types",
                     "data_type": "string",
-                   "required": true,
+                    "required": true,
                     "primary": false,
                     "order": 2
                 },
@@ -339,7 +339,7 @@
                     ],
                     "column_order": 2
                 },
-                                {
+                {
                     "data_path": "action_result.data.*.*.dst",
                     "data_type": "string",
                     "column_name": "destination",
