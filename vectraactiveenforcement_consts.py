@@ -80,7 +80,6 @@ class VectraDetection:
 def create_container(name, identifier, artifact, severity):
     container_doc = {
         "description": "Automation container for hosts identified by Vectra appliance",
-        "label": "events",
         "name": name,
         "run_automation": True,
         "severity": severity,
@@ -92,7 +91,6 @@ def create_container(name, identifier, artifact, severity):
 
 
 def create_artifact(host, action, severity):
-    # TODO pass label from configuration
     artifact_doc = {
         "name": host.name,
         "cef": {
