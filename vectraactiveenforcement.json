@@ -4,7 +4,8 @@
     "description": "Vectra Active Enforcement",
     "type": "information",
     "product_vendor": "Vectra",
-    "logo": "vectraactiveenforcement.png",
+    "logo": "logo_vectra.svg",
+    "logo_dark": "logo_vectra_dark.svg",
     "product_name": "Vectra Active Enforcement",
     "product_version_regex": ".*",
     "publisher": "Vectra",
@@ -177,7 +178,7 @@
                     "column_name": "id",
                     "column_order": 0
                 },
-                                {
+                {
                     "data_path": "action_result.data.*.*.state",
                     "data_type": "string",
                     "column_name": "state",
@@ -299,7 +300,7 @@
                 "dettypes": {
                     "description": "Detection types",
                     "data_type": "string",
-                   "required": true,
+                    "required": true,
                     "primary": false,
                     "order": 2
                 },
@@ -338,7 +339,7 @@
                     ],
                     "column_order": 2
                 },
-                                {
+                {
                     "data_path": "action_result.data.*.*.dst",
                     "data_type": "string",
                     "column_name": "destination",
