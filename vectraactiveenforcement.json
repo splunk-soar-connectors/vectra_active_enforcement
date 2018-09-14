@@ -9,7 +9,7 @@
     "product_name": "Vectra Active Enforcement",
     "product_version_regex": ".*",
     "publisher": "Vectra",
-    "license": "Copyright Vectra 2017",
+    "license": "Copyright Vectra 2017-2018",
     "app_version": "3.0.3",
     "utctime_updated": "2018-05-02T20:59:23.000000Z",
     "package_name": "phantom_vectraactiveenforcement",
@@ -21,8 +21,6 @@
             "description": "Vectra Brain IP/Hostname",
             "data_type": "string",
             "required": true,
-            "value_list": [],
-            "default": "",
             "order": 0
         },
         "severity": {
@@ -41,16 +39,12 @@
             "description": "Username",
             "data_type": "string",
             "required": true,
-            "value_list": [],
-            "default": "",
             "order": 2
         },
         "password": {
             "description": "Password",
             "data_type": "password",
             "required": true,
-            "value_list": [],
-            "default": "",
             "order": 3
         },
         "tags": {
@@ -64,24 +58,18 @@
             "description": "Placeholder",
             "data_type": "ph",
             "required": false,
-            "value_list": [],
-            "default": "",
             "order": 5
         },
         "dtags": {
             "description": "Tags to search (comma separated; no spaces)",
             "data_type": "string",
             "required": false,
-            "value_list": [],
-            "default": "",
             "order": 6
         },
         "ph_1": {
             "description": "Placeholder",
             "data_type": "ph",
             "required": false,
-            "value_list": [],
-            "default": "",
             "order": 7
         },
         "scores": {
@@ -95,8 +83,6 @@
             "description": "Placeholder",
             "data_type": "ph",
             "required": false,
-            "value_list": [],
-            "default": "",
             "order": 9
         },
         "cscore": {
@@ -126,16 +112,12 @@
             "description": "Placeholder",
             "data_type": "ph",
             "required": false,
-            "value_list": [],
-            "default": "",
             "order": 13
         },
         "dettypes": {
             "description": "Detection types (separate values with comma)",
             "data_type": "string",
             "required": false,
-            "value_list": [],
-            "default": "",
             "order": 14
         }
     },
