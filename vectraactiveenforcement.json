@@ -267,7 +267,7 @@
                     "description": "Source IP address of detection",
                     "data_type": "string",
                     "required": false,
-                    "primary": false,
+                    "primary": true,
                     "contains": [
                         "ip"
                     ],
