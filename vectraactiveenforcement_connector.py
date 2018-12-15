@@ -198,9 +198,12 @@ class VectraActiveEnforcementConnector(BaseConnector):
         return converted_objects
 
     def _manage_containers(self, action_result, host_dict, unblock_list):
+
+        phantom_base_url = self.get_phantom_base_url()
+
         try:
             blocked_hosts = requests.get(
-                url='https://127.0.0.1/rest/decided_list/blocked_hosts',
+                url=phantom_base_url + '/rest/decided_list/blocked_hosts',
                 verify=False
             ).json()
         except requests.RequestException:
@@ -209,7 +212,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
         if blocked_hosts.get('failed'):
             try:
                 requests.post(
-                    url='https://127.0.0.1/rest/decided_list',
+                    url=phantom_base_url + '/rest/decided_list',
                     verify=False,
                     data=json.dumps({
                         "name": "blocked_hosts",
@@ -218,7 +221,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
                 )
 
                 blocked_hosts = requests.get(
-                    url='https://127.0.0.1/rest/decided_list/blocked_hosts',
+                    url=phantom_base_url + '/rest/decided_list/blocked_hosts',
                     verify=False
                 ).json()
             except requests.RequestException:
@@ -236,12 +239,12 @@ class VectraActiveEnforcementConnector(BaseConnector):
                 unblock_list.append(host[0])
 
             # id = requests.get(
-            #     url='https://127.0.0.1/rest/decided_list',
+            #     url=phantom_base_url + '/rest/decided_list',
             #     verify=False
             # ).json()['data'][0]['id']
             try:
                 requests.post(
-                    url='https://127.0.0.1/rest/decided_list/blocked_hosts',
+                    url=phantom_base_url + '/rest/decided_list/blocked_hosts',
                     verify=False,
                     data=json.dumps({
                         "name": "blocked_hosts",
@@ -303,6 +306,8 @@ class VectraActiveEnforcementConnector(BaseConnector):
         return
 
     def _update_lists(self, action_result, host_dict):
+
+        phantom_base_url = self.get_phantom_base_url()
         content = []
         for host in host_dict:
             content.append([host_dict[host].ip, host])
@@ -310,7 +315,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
         if len(content) >= 1:
             try:
                 requests.post(
-                    url='https://127.0.0.1/rest/decided_list/blocked_hosts',
+                    url=phantom_base_url + '/rest/decided_list/blocked_hosts',
                     verify=False,
                     data=json.dumps({
                         "name": "blocked_hosts",
@@ -582,11 +587,13 @@ if __name__ == '__main__':
     import pudb
     pudb.set_trace()
 
-    r = requests.get("https://127.0.0.1/login", verify=False)
+    phantom_base_url = BaseConnector._get_phantom_base_url()
+
+    r = requests.get(phantom_base_url + "/login", verify=False)
     csrftoken = r.cookies['csrftoken']
     data = {'username': 'admin', 'password': 'password', 'csrfmiddlewaretoken': csrftoken}
-    headers = {'Cookie': 'csrftoken={0}'.format(csrftoken), 'Referer': 'https://127.0.0.1/login'}
-    r2 = requests.post("https://127.0.0.1/login", verify=False, data=data, headers=headers)
+    headers = {'Cookie': 'csrftoken={0}'.format(csrftoken), 'Referer': phantom_base_url + '/login'}
+    r2 = requests.post(phantom_base_url + "/login", verify=False, data=data, headers=headers)
     sessionid = r2.cookies['sessionid']
 
     if len(sys.argv) < 2:
