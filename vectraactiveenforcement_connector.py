@@ -587,7 +587,7 @@ if __name__ == '__main__':
     import pudb
     pudb.set_trace()
 
-    phantom_base_url = self.get_phantom_base_url()
+    phantom_base_url = BaseConnector._get_phantom_base_url()
 
     r = requests.get(phantom_base_url + "/login", verify=False)
     csrftoken = r.cookies['csrftoken']
