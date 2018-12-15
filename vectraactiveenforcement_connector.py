@@ -203,7 +203,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
 
         try:
             blocked_hosts = requests.get(
-                url=phantom_base_url + '/rest/decided_list/blocked_hosts',
+                url=phantom_base_url + 'rest/decided_list/blocked_hosts',
                 verify=False
             ).json()
         except requests.RequestException:
@@ -212,7 +212,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
         if blocked_hosts.get('failed'):
             try:
                 requests.post(
-                    url=phantom_base_url + '/rest/decided_list',
+                    url=phantom_base_url + 'rest/decided_list',
                     verify=False,
                     data=json.dumps({
                         "name": "blocked_hosts",
@@ -221,7 +221,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
                 )
 
                 blocked_hosts = requests.get(
-                    url=phantom_base_url + '/rest/decided_list/blocked_hosts',
+                    url=phantom_base_url + 'rest/decided_list/blocked_hosts',
                     verify=False
                 ).json()
             except requests.RequestException:
@@ -244,7 +244,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
             # ).json()['data'][0]['id']
             try:
                 requests.post(
-                    url=phantom_base_url + '/rest/decided_list/blocked_hosts',
+                    url=phantom_base_url + 'rest/decided_list/blocked_hosts',
                     verify=False,
                     data=json.dumps({
                         "name": "blocked_hosts",
@@ -315,7 +315,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
         if len(content) >= 1:
             try:
                 requests.post(
-                    url=phantom_base_url + '/rest/decided_list/blocked_hosts',
+                    url=phantom_base_url + 'rest/decided_list/blocked_hosts',
                     verify=False,
                     data=json.dumps({
                         "name": "blocked_hosts",
@@ -589,11 +589,11 @@ if __name__ == '__main__':
 
     phantom_base_url = BaseConnector._get_phantom_base_url()
 
-    r = requests.get(phantom_base_url + "/login", verify=False)
+    r = requests.get(phantom_base_url + "login", verify=False)
     csrftoken = r.cookies['csrftoken']
     data = {'username': 'admin', 'password': 'password', 'csrfmiddlewaretoken': csrftoken}
-    headers = {'Cookie': 'csrftoken={0}'.format(csrftoken), 'Referer': phantom_base_url + '/login'}
-    r2 = requests.post(phantom_base_url + "/login", verify=False, data=data, headers=headers)
+    headers = {'Cookie': 'csrftoken={0}'.format(csrftoken), 'Referer': phantom_base_url + 'login'}
+    r2 = requests.post(phantom_base_url + "login", verify=False, data=data, headers=headers)
     sessionid = r2.cookies['sessionid']
 
     if len(sys.argv) < 2:
