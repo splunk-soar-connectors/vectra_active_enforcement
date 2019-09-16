@@ -1,7 +1,7 @@
 {
     "appid": "d0661b48-cae3-496c-af6f-1bb566ed4916",
     "name": "Vectra Active Enforcement",
-    "description": "Vectra Active Enforcement",
+    "description": "This app supports investigate and ingest actions on Vectra Active Enforcement platform",
     "type": "information",
     "product_vendor": "Vectra",
     "logo": "logo_vectra.svg",
@@ -9,12 +9,12 @@
     "product_name": "Vectra Active Enforcement",
     "product_version_regex": ".*",
     "publisher": "Vectra",
-    "license": "Copyright Vectra 2017-2018",
+    "license": "Copyright Vectra 2017-2019",
     "app_version": "4.0.1068",
     "utctime_updated": "2018-09-18T21:25:27.000000Z",
     "package_name": "phantom_vectraactiveenforcement",
     "main_module": "vectraactiveenforcement_connector.pyc",
-    "min_phantom_version": "3.0.251",
+    "min_phantom_version": "4.2.7532",
     "app_wizard_version": "1.0.0",
     "configuration": {
         "device": {
@@ -61,7 +61,7 @@
             "order": 5
         },
         "dtags": {
-            "description": "Tags to search (comma separated; no spaces)",
+            "description": "Tags to search (comma-separated; no spaces)",
             "data_type": "string",
             "required": false,
             "order": 6
@@ -73,10 +73,9 @@
             "order": 7
         },
         "scores": {
-            "description": "Enable threat/certainty score seach (on poll)",
+            "description": "Enable threat/certainty score search (on poll)",
             "data_type": "boolean",
             "required": true,
-            "default": false,
             "order": 8
         },
         "ph_2": {
@@ -89,23 +88,20 @@
             "description": "Minimum certainty score",
             "data_type": "numeric",
             "required": false,
-            "value_list": [],
-            "default": "75",
+            "default": 75,
             "order": 10
         },
         "tscore": {
             "description": "Minimum threat score",
             "data_type": "numeric",
             "required": false,
-            "value_list": [],
-            "default": "75",
+            "default": 75,
             "order": 11
         },
         "detections": {
             "description": "Enable search for detection types (on poll)",
             "data_type": "boolean",
             "required": true,
-            "default": false,
             "order": 12
         },
         "ph_3": {
@@ -115,7 +111,7 @@
             "order": 13
         },
         "dettypes": {
-            "description": "Detection types (separate values with comma)",
+            "description": "Detection types (comma-separated)",
             "data_type": "string",
             "required": false,
             "order": 14
@@ -125,8 +121,7 @@
         {
             "action": "test connectivity",
             "identifier": "test_connectivity",
-            "description": "Validate the asset configuration for connectivity using supplied configuration",
-            "verbose": "",
+            "description": "Validate the asset configuration for connectivity using the supplied configuration",
             "type": "test",
             "read_only": true,
             "parameters": {},
@@ -137,7 +132,6 @@
             "action": "lookup ip",
             "identifier": "lookup_ip",
             "description": "Retrieve host based on IP address",
-            "verbose": "",
             "type": "investigate",
             "read_only": true,
             "parameters": {
@@ -149,75 +143,10 @@
                     "contains": [
                         "ip"
                     ],
-                    "value_list": [],
-                    "default": "",
                     "order": 0
                 }
             },
             "output": [
-                {
-                    "data_path": "action_result.data.*.*.id",
-                    "data_type": "numeric",
-                    "column_name": "id",
-                    "column_order": 0
-                },
-                {
-                    "data_path": "action_result.data.*.*.state",
-                    "data_type": "string",
-                    "column_name": "state",
-                    "column_order": 1
-                },
-                {
-                    "data_path": "action_result.data.*.*.key_asset",
-                    "data_type": "string",
-                    "column_name": "key asset",
-                    "column_order": 2
-                },
-                {
-                    "data_path": "action_result.data.*.*.name",
-                    "data_type": "string",
-                    "column_name": "hostname",
-                    "column_order": 3
-                },
-                {
-                    "data_path": "action_result.data.*.*.owner",
-                    "data_type": "string",
-                    "column_name": "owner",
-                    "column_order": 4
-                },
-                {
-                    "data_path": "action_result.data.*.*.ip",
-                    "data_type": "string",
-                    "column_name": "ip",
-                    "contains": [
-                        "ip"
-                    ],
-                    "column_order": 5
-                },
-                {
-                    "data_path": "action_result.data.*.*.certainty",
-                    "data_type": "string",
-                    "column_name": "certianty",
-                    "column_order": 6
-                },
-                {
-                    "data_path": "action_result.data.*.*.threat",
-                    "data_type": "string",
-                    "column_name": "threat",
-                    "column_order": 7
-                },
-                {
-                    "data_path": "action_result.data.*.*.tags",
-                    "data_type": "string",
-                    "column_name": "tags",
-                    "column_order": 8
-                },
-                {
-                    "data_path": "action_result.data.*.*.artifacts",
-                    "data_type": "string",
-                    "column_name": "artifacts",
-                    "column_order": 9
-                },
                 {
                     "data_path": "action_result.status",
                     "data_type": "string"
@@ -230,15 +159,78 @@
                     ]
                 },
                 {
-                    "data_path": "action_result.message",
-                    "data_type": "string"
-                },
-                {
                     "data_path": "action_result.data",
                     "data_type": "string"
                 },
                 {
+                    "data_path": "action_result.data.*.*.artifacts",
+                    "data_type": "string",
+                    "column_name": "Artifacts",
+                    "column_order": 9
+                },
+                {
+                    "data_path": "action_result.data.*.*.certainty",
+                    "data_type": "string",
+                    "column_name": "Certianty",
+                    "column_order": 6
+                },
+                {
+                    "data_path": "action_result.data.*.*.id",
+                    "data_type": "numeric",
+                    "column_name": "ID",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.data.*.*.ip",
+                    "data_type": "string",
+                    "column_name": "IP",
+                    "contains": [
+                        "ip"
+                    ],
+                    "column_order": 5
+                },
+                {
+                    "data_path": "action_result.data.*.*.key_asset",
+                    "data_type": "string",
+                    "column_name": "Key Asset",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.data.*.*.name",
+                    "data_type": "string",
+                    "column_name": "Hostname",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.data.*.*.owner",
+                    "data_type": "string",
+                    "column_name": "Owner",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.data.*.*.state",
+                    "data_type": "string",
+                    "column_name": "State",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.data.*.*.tags",
+                    "data_type": "string",
+                    "column_name": "Tags",
+                    "column_order": 8
+                },
+                {
+                    "data_path": "action_result.data.*.*.threat",
+                    "data_type": "string",
+                    "column_name": "Threat",
+                    "column_order": 7
+                },
+                {
                     "data_path": "action_result.summary",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
                     "data_type": "string"
                 },
                 {
@@ -259,7 +251,6 @@
             "action": "get detections",
             "identifier": "get_detections",
             "description": "Retrieve detections",
-            "verbose": "",
             "type": "investigate",
             "read_only": true,
             "parameters": {
@@ -277,21 +268,18 @@
                     "description": "Destination port of detection",
                     "data_type": "numeric",
                     "required": false,
-                    "primary": false,
                     "order": 1
                 },
                 "dettypes": {
                     "description": "Detection types",
                     "data_type": "string",
                     "required": true,
-                    "primary": false,
                     "order": 2
                 },
                 "state": {
                     "description": "State of detection",
                     "data_type": "string",
                     "required": true,
-                    "primary": false,
                     "default": "active",
                     "value_list": [
                         "active",
@@ -302,77 +290,8 @@
             },
             "output": [
                 {
-                    "data_path": "action_result.data.*.*.id",
-                    "data_type": "numeric",
-                    "column_name": "id",
-                    "column_order": 0
-                },
-                {
-                    "data_path": "action_result.data.*.*.triage_rule",
-                    "data_type": "numeric",
-                    "column_name": "triage",
-                    "column_order": 1
-                },
-                {
-                    "data_path": "action_result.data.*.*.src",
-                    "data_type": "string",
-                    "column_name": "source",
-                    "contains": [
-                        "ip"
-                    ],
-                    "column_order": 2
-                },
-                {
-                    "data_path": "action_result.data.*.*.dst",
-                    "data_type": "string",
-                    "column_name": "destination",
-                    "contains": [
-                        "ip"
-                    ],
-                    "column_order": 3
-                },
-                {
-                    "data_path": "action_result.data.*.*.targets_key_asset",
-                    "data_type": "boolean",
-                    "column_name": "target key asset",
-                    "column_order": 4
-                },
-                {
-                    "data_path": "action_result.data.*.*.category",
-                    "data_type": "string",
-                    "column_name": "category",
-                    "column_order": 5
-                },
-                {
-                    "data_path": "action_result.data.*.*.type",
-                    "data_type": "string",
-                    "column_name": "type",
-                    "column_order": 6
-                },
-                {
-                    "data_path": "action_result.data.*.*.certainty",
-                    "data_type": "string",
-                    "column_name": "certainty",
-                    "column_order": 7
-                },
-                {
-                    "data_path": "action_result.data.*.*.threat",
-                    "data_type": "string",
-                    "column_name": "threat",
-                    "column_order": 8
-                },
-                {
-                    "data_path": "action_result.data.*.tags",
-                    "data_type": "string",
-                    "column_name": "tags",
-                    "column_order": 9
-                },
-                {
-                    "data_path": "action_result.parameter.src_ip",
-                    "data_type": "string",
-                    "contains": [
-                        "ip"
-                    ]
+                    "data_path": "action_result.status",
+                    "data_type": "string"
                 },
                 {
                     "data_path": "action_result.parameter.dest_port",
@@ -383,15 +302,14 @@
                     "data_type": "string"
                 },
                 {
+                    "data_path": "action_result.parameter.src_ip",
+                    "data_type": "string",
+                    "contains": [
+                        "ip"
+                    ]
+                },
+                {
                     "data_path": "action_result.parameter.state",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.message",
                     "data_type": "string"
                 },
                 {
@@ -399,7 +317,77 @@
                     "data_type": "string"
                 },
                 {
+                    "data_path": "action_result.data.*.*.category",
+                    "data_type": "string",
+                    "column_name": "Category",
+                    "column_order": 5
+                },
+                {
+                    "data_path": "action_result.data.*.*.certainty",
+                    "data_type": "string",
+                    "column_name": "Certainty",
+                    "column_order": 7
+                },
+                {
+                    "data_path": "action_result.data.*.*.dst",
+                    "data_type": "string",
+                    "column_name": "Destination",
+                    "contains": [
+                        "ip"
+                    ],
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.data.*.*.id",
+                    "data_type": "numeric",
+                    "column_name": "ID",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.data.*.*.src",
+                    "data_type": "string",
+                    "column_name": "Source",
+                    "contains": [
+                        "ip"
+                    ],
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.data.*.*.targets_key_asset",
+                    "data_type": "boolean",
+                    "column_name": "Target Key Asset",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.data.*.*.threat",
+                    "data_type": "string",
+                    "column_name": "Threat",
+                    "column_order": 8
+                },
+                {
+                    "data_path": "action_result.data.*.*.triage_rule",
+                    "data_type": "numeric",
+                    "column_name": "Triage",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.data.*.*.type",
+                    "data_type": "string",
+                    "column_name": "Type",
+                    "column_order": 6
+                },
+                {
+                    "data_path": "action_result.data.*.tags",
+                    "data_type": "string",
+                    "column_name": "Tags",
+                    "column_order": 9
+                },
+                {
                     "data_path": "action_result.summary",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
                     "data_type": "string"
                 },
                 {
@@ -420,7 +408,6 @@
             "action": "get scored hosts",
             "identifier": "get_scored_hosts",
             "description": "Retrieve hosts based on a minimum certainty and threat score",
-            "verbose": "",
             "type": "investigate",
             "read_only": true,
             "parameters": {
@@ -428,7 +415,6 @@
                     "description": "Minimum certainty score",
                     "data_type": "numeric",
                     "required": true,
-                    "primary": true,
                     "default": 50,
                     "order": 0
                 },
@@ -436,74 +422,14 @@
                     "description": "Minimum threat score",
                     "data_type": "numeric",
                     "required": true,
-                    "primary": true,
                     "default": 50,
                     "order": 1
                 }
             },
             "output": [
                 {
-                    "data_path": "action_result.data.*.*.id",
-                    "data_type": "numeric",
-                    "column_name": "id",
-                    "column_order": 0
-                },
-                {
-                    "data_path": "action_result.data.*.*.state",
-                    "data_type": "string",
-                    "column_name": "state",
-                    "column_order": 1
-                },
-                {
-                    "data_path": "action_result.data.*.*.key_asset",
-                    "data_type": "string",
-                    "column_name": "key asset",
-                    "column_order": 2
-                },
-                {
-                    "data_path": "action_result.data.*.*.name",
-                    "data_type": "string",
-                    "column_name": "hostname",
-                    "column_order": 3
-                },
-                {
-                    "data_path": "action_result.data.*.*.owner",
-                    "data_type": "string",
-                    "column_name": "owner",
-                    "column_order": 4
-                },
-                {
-                    "data_path": "action_result.data.*.*.ip",
-                    "data_type": "string",
-                    "column_name": "ip",
-                    "contains": [
-                        "ip"
-                    ],
-                    "column_order": 5
-                },
-                {
-                    "data_path": "action_result.data.*.*.certainty",
-                    "data_type": "string",
-                    "column_name": "certianty",
-                    "column_order": 6
-                },
-                {
-                    "data_path": "action_result.data.*.*.threat",
-                    "data_type": "string",
-                    "column_name": "threat",
-                    "column_order": 7
-                },
-                {
-                    "data_path": "action_result.data.*.*.tags",
-                    "data_type": "string",
-                    "column_name": "tags",
-                    "column_order": 8
-                },
-                {
-                    "data_path": "action_result.data.*.*.artifacts",
-                    "data_type": "string",
-                    "column_name": "artifacts",
-                    "column_order": 9
+                    "data_path": "action_result.status",
+                    "data_type": "string"
                 },
                 {
                     "data_path": "action_result.parameter.cscore",
@@ -514,19 +440,78 @@
                     "data_type": "numeric"
                 },
                 {
-                    "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.message",
-                    "data_type": "string"
-                },
-                {
                     "data_path": "action_result.data",
                     "data_type": "string"
                 },
                 {
+                    "data_path": "action_result.data.*.*.artifacts",
+                    "data_type": "string",
+                    "column_name": "Artifacts",
+                    "column_order": 9
+                },
+                {
+                    "data_path": "action_result.data.*.*.certainty",
+                    "data_type": "string",
+                    "column_name": "Certianty",
+                    "column_order": 6
+                },
+                {
+                    "data_path": "action_result.data.*.*.id",
+                    "data_type": "numeric",
+                    "column_name": "ID",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.data.*.*.ip",
+                    "data_type": "string",
+                    "column_name": "IP",
+                    "contains": [
+                        "ip"
+                    ],
+                    "column_order": 5
+                },
+                {
+                    "data_path": "action_result.data.*.*.key_asset",
+                    "data_type": "string",
+                    "column_name": "Key Asset",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.data.*.*.name",
+                    "data_type": "string",
+                    "column_name": "Hostname",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.data.*.*.owner",
+                    "data_type": "string",
+                    "column_name": "Owner",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.data.*.*.state",
+                    "data_type": "string",
+                    "column_name": "State",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.data.*.*.tags",
+                    "data_type": "string",
+                    "column_name": "Tags",
+                    "column_order": 8
+                },
+                {
+                    "data_path": "action_result.data.*.*.threat",
+                    "data_type": "string",
+                    "column_name": "Threat",
+                    "column_order": 7
+                },
+                {
                     "data_path": "action_result.summary",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
                     "data_type": "string"
                 },
                 {
@@ -546,8 +531,7 @@
         {
             "action": "get tagged hosts",
             "identifier": "get_tagged_hosts",
-            "description": "Retrieve hosts  based on descriptive tags",
-            "verbose": "",
+            "description": "Retrieve hosts based on descriptive tags",
             "type": "investigate",
             "read_only": true,
             "parameters": {
@@ -555,84 +539,16 @@
                     "description": "Tags",
                     "data_type": "string",
                     "required": true,
-                    "primary": true,
                     "order": 0
                 }
             },
             "output": [
                 {
-                    "data_path": "action_result.data.*.*.id",
-                    "data_type": "numeric",
-                    "column_name": "id",
-                    "column_order": 0
-                },
-                {
-                    "data_path": "action_result.data.*.*.state",
-                    "data_type": "string",
-                    "column_name": "state",
-                    "column_order": 1
-                },
-                {
-                    "data_path": "action_result.data.*.*.key_asset",
-                    "data_type": "string",
-                    "column_name": "key asset",
-                    "column_order": 2
-                },
-                {
-                    "data_path": "action_result.data.*.*.name",
-                    "data_type": "string",
-                    "column_name": "hostname",
-                    "column_order": 3
-                },
-                {
-                    "data_path": "action_result.data.*.*.owner",
-                    "data_type": "string",
-                    "column_name": "owner",
-                    "column_order": 4
-                },
-                {
-                    "data_path": "action_result.data.*.*.ip",
-                    "data_type": "string",
-                    "column_name": "ip",
-                    "contains": [
-                        "ip"
-                    ],
-                    "column_order": 5
-                },
-                {
-                    "data_path": "action_result.data.*.*.certainty",
-                    "data_type": "string",
-                    "column_name": "certianty",
-                    "column_order": 6
-                },
-                {
-                    "data_path": "action_result.data.*.*.threat",
-                    "data_type": "string",
-                    "column_name": "threat",
-                    "column_order": 7
-                },
-                {
-                    "data_path": "action_result.data.*.*.tags",
-                    "data_type": "string",
-                    "column_name": "tags",
-                    "column_order": 8
-                },
-                {
-                    "data_path": "action_result.data.*.*.artifacts",
-                    "data_type": "string",
-                    "column_name": "artifacts",
-                    "column_order": 9
-                },
-                {
-                    "data_path": "action_result.parameter.dtags",
-                    "data_type": "string"
-                },
-                {
                     "data_path": "action_result.status",
                     "data_type": "string"
                 },
                 {
-                    "data_path": "action_result.message",
+                    "data_path": "action_result.parameter.dtags",
                     "data_type": "string"
                 },
                 {
@@ -640,7 +556,74 @@
                     "data_type": "string"
                 },
                 {
+                    "data_path": "action_result.data.*.*.artifacts",
+                    "data_type": "string",
+                    "column_name": "Artifacts",
+                    "column_order": 9
+                },
+                {
+                    "data_path": "action_result.data.*.*.certainty",
+                    "data_type": "string",
+                    "column_name": "Certianty",
+                    "column_order": 6
+                },
+                {
+                    "data_path": "action_result.data.*.*.id",
+                    "data_type": "numeric",
+                    "column_name": "ID",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.data.*.*.ip",
+                    "data_type": "string",
+                    "column_name": "IP",
+                    "contains": [
+                        "ip"
+                    ],
+                    "column_order": 5
+                },
+                {
+                    "data_path": "action_result.data.*.*.key_asset",
+                    "data_type": "string",
+                    "column_name": "Key Asset",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.data.*.*.name",
+                    "data_type": "string",
+                    "column_name": "Hostname",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.data.*.*.owner",
+                    "data_type": "string",
+                    "column_name": "Owner",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.data.*.*.state",
+                    "data_type": "string",
+                    "column_name": "State",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.data.*.*.tags",
+                    "data_type": "string",
+                    "column_name": "Tags",
+                    "column_order": 8
+                },
+                {
+                    "data_path": "action_result.data.*.*.threat",
+                    "data_type": "string",
+                    "column_name": "Threat",
+                    "column_order": 7
+                },
+                {
                     "data_path": "action_result.summary",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
                     "data_type": "string"
                 },
                 {
@@ -661,8 +644,7 @@
             "action": "on poll",
             "identifier": "on_poll",
             "description": "Query device on a known interval",
-            "verbose": "",
-            "type": "investigate",
+            "type": "ingest",
             "read_only": true,
             "parameters": {},
             "output": [],
