@@ -11,10 +11,11 @@
     "publisher": "Vectra",
     "license": "Copyright Vectra 2017-2019",
     "app_version": "3.0.6",
+    "python_version": "3",
     "utctime_updated": "2022-01-07T20:33:34.000000Z",
     "package_name": "phantom_vectraactiveenforcement",
-    "main_module": "vectraactiveenforcement_connector.pyc",
-    "min_phantom_version": "4.2.7532",
+    "main_module": "vectraactiveenforcement_connector.py",
+    "min_phantom_version": "6.0.0",
     "app_wizard_version": "1.0.0",
     "configuration": {
         "device": {
@@ -651,7 +652,7 @@
             "versions": "EQ(*)"
         }
     ],
-    "pip_dependencies": {
+    "pip3_dependencies": {
         "wheel": [
             {
                 "module": "backports.functools_lru_cache",
@@ -659,7 +660,7 @@
             },
             {
                 "module": "beautifulsoup4",
-                "input_file": "wheels/beautifulsoup4-4.9.1-py2-none-any.whl"
+                "input_file": "wheels/beautifulsoup4-4.12.2-py3-none-any.whl"
             },
             {
                 "module": "certifi",
