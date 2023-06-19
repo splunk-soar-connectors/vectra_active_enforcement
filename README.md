@@ -2,7 +2,7 @@
 # Vectra Active Enforcement
 
 Publisher: Vectra  
-Connector Version: 3\.0\.6
+Connector Version: 3\.0\.6  
 Product Vendor: Vectra  
 Product Name: Vectra Active Enforcement  
 Product Version Supported (regex): "\.\*"  
