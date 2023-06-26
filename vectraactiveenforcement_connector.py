@@ -2,14 +2,16 @@
 # Phantom sample App Connector python file
 # -----------------------------------------
 import json
+from time import gmtime, strftime
+
 import phantom.app as phantom
 import requests
 from bs4 import BeautifulSoup
 from phantom.action_result import ActionResult
 from phantom.base_connector import BaseConnector
-from time import gmtime
-from time import strftime
+
 from vectraactiveenforcement_consts import *
+
 
 class RetVal(tuple):
 
@@ -54,7 +56,8 @@ class VectraActiveEnforcementConnector(BaseConnector):
         if 200 <= r.status_code < 399:
             return RetVal(phantom.APP_SUCCESS, resp_json)
         else:
-            message = ('Error from server. Status Code: {0} Data from server: {1}').format(r.status_code, r.text.replace('{', '{{').replace('}', '}}'))
+            message = ('Error from server. Status Code: {0} Data from \
+                       server: {1}').format(r.status_code, r.text.replace('{', '{{').replace('}', '}}'))
             return RetVal(action_result.set_status(phantom.APP_ERROR, message), None)
 
     def _process_response(self, r, action_result):
@@ -69,7 +72,8 @@ class VectraActiveEnforcementConnector(BaseConnector):
                 return self._process_html_response(r, action_result)
             if not r.text:
                 return self._process_empty_reponse(r, action_result)
-            message = ("Can't process response from server. Status Code: {0} Data from server: {1}").format(r.status_code, r.text.replace('{', '{{').replace('}', '}}'))
+            message = ("Can't process response from server. Status Code: {0} \
+                       Data from server: {1}").format(r.status_code, r.text.replace('{', '{{').replace('}', '}}'))
             return RetVal(action_result.set_status(phantom.APP_ERROR, message), None)
 
     def _make_rest_call(self, endpoint, action_result, headers=None, params=None, data=None, method='get'):
@@ -153,9 +157,12 @@ class VectraActiveEnforcementConnector(BaseConnector):
             blocked_hosts = requests.get(url=phantom_base_url + 'rest/decided_list/blocked_hosts', verify=False)
             blocked_hosts = blocked_hosts.json()
         except requests.RequestException as rerr:
-            return action_result.set_status(phantom.APP_ERROR, ('Unable to retrieve list of currently blocked hosts. Error: {0}').format(str(rerr)))
+            return action_result.set_status(phantom.APP_ERROR, ('Unable to retrieve list of currently blocked hosts.\
+                                                                 Error: {0}').format(str(rerr)))
         except Exception:
-            return action_result.set_status(phantom.APP_ERROR, ('Unable to retrieve list of currently blocked hosts.\r\nCode: {0}\r\nContent:{1}').format(blocked_hosts.status_code, blocked_hosts.content))
+            return action_result.set_status(
+                phantom.APP_ERROR, ('Unable to retrieve list of currently \
+                                    blocked hosts.\r\nCode: {0}\r\nContent:{1}').format(blocked_hosts.status_code, blocked_hosts.content))
 
         if blocked_hosts.get('failed'):
             try:
@@ -167,7 +174,9 @@ class VectraActiveEnforcementConnector(BaseConnector):
             except requests.RequestException:
                 return action_result.set_status(phantom.APP_ERROR, 'Unable to retrieve list of currently blocked hosts')
             except Exception:
-                return action_result.set_status(phantom.APP_ERROR, ('Unable to retrieve list of currently blocked hosts.\r\nCode: {0}\r\nContent:{1}').format(blocked_hosts.status_code, blocked_hosts.content))
+                return action_result.set_status(
+                    phantom.APP_ERROR, ('Unable to retrieve list of currently blocked hosts.\r\nCode:\
+                                         {0}\r\nContent:{1}').format(blocked_hosts.status_code, blocked_hosts.content))
 
         self.save_progress('Retrieved currently blocked hosts list...')
         if blocked_hosts['content'][0][0] == 'empty' and len(host_dict) == 0:
@@ -205,7 +214,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
     def _clear_blocked_hosts_list(self, action_result):
         phantom_base_url = self.get_phantom_base_url()
         try:
-            requests.post(url=('{0}rest/decided_list').format(phantom_base_url), verify=False, data=json.dumps({'name': 'blocked_hosts', 
+            requests.post(url=('{0}rest/decided_list').format(phantom_base_url), verify=False, data=json.dumps({'name': 'blocked_hosts',
                'content': [
                          [
                           'empty']]}))
@@ -220,22 +229,26 @@ class VectraActiveEnforcementConnector(BaseConnector):
         name = ('Block request: {ip} [{name}]').format(ip=host.get('ip', ''), name=host.get('name', ''))
         identifier = ('vectra_block_request {ip} {time}').format(ip=host.get('ip', ''), time=strftime('%m/%d/%Y %H:%M', gmtime()))
         artifact = create_artifact(host, 'block', config['severity'])
-        container_ret_val, message, self._block_container_id = self.save_container(create_container(name, identifier, artifact, config['severity']))
+        container_ret_val, message, self._block_container_id = self.save_container(
+            create_container(name, identifier, artifact, config['severity'])
+        )
         self.save_progress(('Successfully saved container: {}').format(self._block_container_id))
 
     def _unblock_host(self, host):
         config = self.get_config()
         name = ('Unblock request: {ip} [{name}]').format(ip=host[0], name=host[1])
         identifier = ('vectra_unblock_request {ip} {time}').format(ip=host[0], time=strftime('%m/%d/%Y %H:%M', gmtime()))
-        artifact = {'name': host[1], 
-           'cef': {'act': 'unblock', 
-                   'dvc': host[0], 
-                   'dvchost': host[1]}, 
-           'run_automation': False, 
-           'label': 'incident', 
-           'severity': config['severity'], 
+        artifact = {'name': host[1],
+           'cef': {'act': 'unblock',
+                   'dvc': host[0],
+                   'dvchost': host[1]},
+           'run_automation': False,
+           'label': 'incident',
+           'severity': config['severity'],
            'source_data_identifier': 'vectra'}
-        container_ret_val, message, self._block_container_id = self.save_container(create_container(name, identifier, artifact, config['severity']))
+        container_ret_val, message, self._block_container_id = self.save_container(
+            create_container(name, identifier, artifact, config['severity'])
+        )
         self.save_progress(('Successfully unblocked {}').format(host[0]))
 
     def _update_lists(self, action_result, host_dict):
@@ -246,7 +259,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
 
         if len(content) >= 1:
             try:
-                requests.post(url=phantom_base_url + 'rest/decided_list/blocked_hosts', verify=False, data=json.dumps({'name': 'blocked_hosts', 
+                requests.post(url=phantom_base_url + 'rest/decided_list/blocked_hosts', verify=False, data=json.dumps({'name': 'blocked_hosts',
                    'content': content}))
             except requests.RequestException:
                 action_result.set_status(phantom.APP_ERROR, 'Unable to update list of currently blocked hosts')
@@ -281,10 +294,10 @@ class VectraActiveEnforcementConnector(BaseConnector):
         all_detections = {}
         all_ips = set()
         for detection in param['dettypes'].split(','):
-            request_params = {'src_ip': param.get('src_ip', ''), 
-               'dst_port': param.get('dst_port', None), 
-               'type_vname': detection.strip(), 
-               'state': param['state'], 
+            request_params = {'src_ip': param.get('src_ip', ''),
+               'dst_port': param.get('dst_port', None),
+               'type_vname': detection.strip(),
+               'state': param['state'],
                'page_size': 'all'}
             _, retrieved_detections, retrieved_ips = self._process_detections(action_result, request_params)
             if retrieved_detections:
@@ -303,8 +316,8 @@ class VectraActiveEnforcementConnector(BaseConnector):
         self.save_progress(('In action handler for: {0}').format(self.get_action_identifier()))
         action_result = self.add_action_result(ActionResult(dict(param)))
         retrieved_hosts = {}
-        request_params = {'c_score_gte': param['cscore'], 
-           't_score_gte': param['tscore'], 
+        request_params = {'c_score_gte': param['cscore'],
+           't_score_gte': param['tscore'],
            'page_size': 'all'}
         self._process_hosts(None, action_result, request_params, retrieved_hosts)
         summary_dict = self._converts_object_to_json(retrieved_hosts)
@@ -317,7 +330,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
         self.save_progress(('In action handler for: {0}').format(self.get_action_identifier()))
         action_result = self.add_action_result(ActionResult(dict(param)))
         retrieved_hosts = {}
-        request_params = {'tags': param['dtags'], 
+        request_params = {'tags': param['dtags'],
            'page_size': 'all'}
         self._process_hosts(None, action_result, request_params, retrieved_hosts)
         summary_dict = self._converts_object_to_json(retrieved_hosts)
@@ -337,23 +350,23 @@ class VectraActiveEnforcementConnector(BaseConnector):
             request_params = {'tags': config.get('dtags', 'block'), 'page_size': 'all'}
             self._process_hosts('tags', action_result, request_params, retrieved_hosts)
         if config['scores']:
-            request_params = {'c_score_gte': config.get('cscore', 50), 't_score_gte': config.get('tscore', 50), 
+            request_params = {'c_score_gte': config.get('cscore', 50), 't_score_gte': config.get('tscore', 50),
                'page_size': 'all'}
             self._process_hosts('scores', action_result, request_params, retrieved_hosts)
         if config['detections']:
             if len(config.get('dettypes', '')) == 0:
                 return action_result.set_status(phantom.APP_ERROR, 'Detections enabled. No detection types defined')
             for dettype in config.get('dettypes', '').split(','):
-                request_params = {'type_vname': dettype.strip(), 
-                   'state': 'active', 
+                request_params = {'type_vname': dettype.strip(),
+                   'state': 'active',
                    'page_size': 'all'}
                 _, detections, detection_ips = self._process_detections(action_result, request_params)
                 if detections:
                     retrieved_detections.update(detections)
                 if detection_ips:
                     for ip in set(detection_ips):
-                        request_params = {'last_source': ip, 
-                           'state': 'active', 
+                        request_params = {'last_source': ip,
+                           'state': 'active',
                            'page_size': 'all'}
                         self._process_hosts('detections', action_result, request_params, retrieved_hosts)
 
@@ -407,12 +420,14 @@ class VectraActiveEnforcementConnector(BaseConnector):
 
 
 if __name__ == '__main__':
-    import sys, pudb
+    import sys
+
+    import pudb
     pudb.set_trace()
     phantom_base_url = BaseConnector._get_phantom_base_url()
     r = requests.get(phantom_base_url + 'login', verify=False)
     csrftoken = r.cookies['csrftoken']
-    data = {'username': 'admin', 'password': 'password', 'csrfmiddlewaretoken': csrftoken}
+    data = {'username': 'admin', 'password': 'password', 'csrfmiddlewaretoken': csrftoken}  # pragma: allowlist secret
     headers = {'Cookie': ('csrftoken={0}').format(csrftoken), 'Referer': phantom_base_url + 'login'}
     r2 = requests.post(phantom_base_url + 'login', verify=False, data=data, headers=headers)
     sessionid = r2.cookies['sessionid']
