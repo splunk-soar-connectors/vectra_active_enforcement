@@ -9,12 +9,14 @@
     "product_name": "Vectra Active Enforcement",
     "product_version_regex": ".*",
     "publisher": "Vectra",
-    "license": "Copyright Vectra 2017-2019",
-    "app_version": "3.0.5",
-    "utctime_updated": "2018-09-18T21:25:27.000000Z",
+    "license": "Copyright Vectra 2017-2023",
+    "app_version": "4.0.0",
+    "python_version": "3",
+    "fips_compliant": false,
+    "utctime_updated": "2022-01-07T20:33:34.000000Z",
     "package_name": "phantom_vectraactiveenforcement",
-    "main_module": "vectraactiveenforcement_connector.pyc",
-    "min_phantom_version": "4.2.7532",
+    "main_module": "vectraactiveenforcement_connector.py",
+    "min_phantom_version": "6.0.0",
     "app_wizard_version": "1.0.0",
     "configuration": {
         "device": {
@@ -50,26 +52,22 @@
         "tags": {
             "description": "Enable tag search (on poll)",
             "data_type": "boolean",
-            "required": false,
             "default": true,
             "order": 4
         },
         "ph_0": {
             "description": "Placeholder",
             "data_type": "ph",
-            "required": false,
             "order": 5
         },
         "dtags": {
             "description": "Tags to search (comma-separated; no spaces)",
             "data_type": "string",
-            "required": false,
             "order": 6
         },
         "ph_1": {
             "description": "Placeholder",
             "data_type": "ph",
-            "required": false,
             "order": 7
         },
         "scores": {
@@ -81,20 +79,17 @@
         "ph_2": {
             "description": "Placeholder",
             "data_type": "ph",
-            "required": false,
             "order": 9
         },
         "cscore": {
             "description": "Minimum certainty score",
             "data_type": "numeric",
-            "required": false,
             "default": 75,
             "order": 10
         },
         "tscore": {
             "description": "Minimum threat score",
             "data_type": "numeric",
-            "required": false,
             "default": 75,
             "order": 11
         },
@@ -107,13 +102,11 @@
         "ph_3": {
             "description": "Placeholder",
             "data_type": "ph",
-            "required": false,
             "order": 13
         },
         "dettypes": {
             "description": "Detection types (comma-separated)",
             "data_type": "string",
-            "required": false,
             "order": 14
         }
     },
@@ -149,7 +142,11 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.ip",
@@ -257,7 +254,6 @@
                 "src_ip": {
                     "description": "Source IP address of detection",
                     "data_type": "string",
-                    "required": false,
                     "primary": true,
                     "contains": [
                         "ip"
@@ -267,7 +263,6 @@
                 "dest_port": {
                     "description": "Destination port of detection",
                     "data_type": "numeric",
-                    "required": false,
                     "order": 1
                 },
                 "dettypes": {
@@ -291,7 +286,11 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.dest_port",
@@ -429,7 +428,11 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.cscore",
@@ -545,7 +548,11 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.dtags",
@@ -650,5 +657,29 @@
             "output": [],
             "versions": "EQ(*)"
         }
-    ]
+    ],
+    "pip3_dependencies": {
+        "wheel": [
+            {
+                "module": "beautifulsoup4",
+                "input_file": "wheels/py3/beautifulsoup4-4.9.1-py3-none-any.whl"
+            },
+            {
+                "module": "soupsieve",
+                "input_file": "wheels/py3/soupsieve-2.3.2.post1-py3-none-any.whl"
+            }
+        ]
+    },
+    "pip39_dependencies": {
+        "wheel": [
+            {
+                "module": "beautifulsoup4",
+                "input_file": "wheels/py3/beautifulsoup4-4.9.1-py3-none-any.whl"
+            },
+            {
+                "module": "soupsieve",
+                "input_file": "wheels/py3/soupsieve-2.4.1-py3-none-any.whl"
+            }
+        ]
+    }
 }
