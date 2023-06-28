@@ -2,11 +2,11 @@
 # Vectra Active Enforcement
 
 Publisher: Vectra  
-Connector Version: 3\.0\.5  
+Connector Version: 3\.0\.6  
 Product Vendor: Vectra  
 Product Name: Vectra Active Enforcement  
 Product Version Supported (regex): "\.\*"  
-Minimum Product Version: 4\.2\.7532  
+Minimum Product Version: 6\.0\.0
 
 This app supports investigate and ingest actions on Vectra Active Enforcement platform
 
