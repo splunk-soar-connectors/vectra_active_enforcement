@@ -9,7 +9,7 @@
     "product_name": "Vectra Active Enforcement",
     "product_version_regex": ".*",
     "publisher": "Vectra",
-    "license": "Copyright Vectra 2017-2019",
+    "license": "Copyright Vectra 2017-2023",
     "app_version": "4.0.0",
     "python_version": "3",
     "fips_compliant": false,
