@@ -1,7 +1,7 @@
 # Vectra Active Enforcement
 
 Publisher: Vectra \
-Connector Version: 4.0.0 \
+Connector Version: 4.0.1 \
 Product Vendor: Vectra \
 Product Name: Vectra Active Enforcement \
 Minimum Product Version: 6.0.0
