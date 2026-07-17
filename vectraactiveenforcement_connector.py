@@ -1,6 +1,6 @@
 # File: vectraactiveenforcement_connector.py
 #
-# Copyright Vectra 2017-2025
+# Copyright Vectra 2017-2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -106,7 +106,7 @@ class VectraActiveEnforcementConnector(BaseConnector):
                 auth=(self.username, self.password),
                 json=data,
                 headers=headers,
-                verify=config.get("verify_server_cert", False),
+                verify=config.get("verify_server_cert", True),
                 params=params,
             )
         except Exception as e:

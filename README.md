@@ -1,10 +1,10 @@
 # Vectra Active Enforcement
 
-Publisher: Vectra \
-Connector Version: 4.0.1 \
-Product Vendor: Vectra \
-Product Name: Vectra Active Enforcement \
-Minimum Product Version: 6.0.0
+Publisher: Vectra <br>
+Connector Version: 4.0.1 <br>
+Product Vendor: Vectra <br>
+Product Name: Vectra Active Enforcement <br>
+Minimum Product Version: 6.3.0
 
 This app supports investigate and ingest actions on Vectra Active Enforcement platform
 
@@ -25,21 +25,22 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 **tscore** | optional | numeric | Minimum threat score |
 **detections** | required | boolean | Enable search for detection types (on poll) |
 **dettypes** | optional | string | Detection types (comma-separated) |
+**verify_server_cert** | optional | boolean | Verify server certificate |
 
 ### Supported Actions
 
-[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using the supplied configuration \
-[lookup ip](#action-lookup-ip) - Retrieve host based on IP address \
-[get detections](#action-get-detections) - Retrieve detections \
-[get scored hosts](#action-get-scored-hosts) - Retrieve hosts based on a minimum certainty and threat score \
-[get tagged hosts](#action-get-tagged-hosts) - Retrieve hosts based on descriptive tags \
+[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using the supplied configuration <br>
+[lookup ip](#action-lookup-ip) - Retrieve host based on IP address <br>
+[get detections](#action-get-detections) - Retrieve detections <br>
+[get scored hosts](#action-get-scored-hosts) - Retrieve hosts based on a minimum certainty and threat score <br>
+[get tagged hosts](#action-get-tagged-hosts) - Retrieve hosts based on descriptive tags <br>
 [on poll](#action-on-poll) - Query device on a known interval
 
 ## action: 'test connectivity'
 
 Validate the asset configuration for connectivity using the supplied configuration
 
-Type: **test** \
+Type: **test** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -54,7 +55,7 @@ No Output
 
 Retrieve host based on IP address
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -89,7 +90,7 @@ summary.total_objects_successful | numeric | | |
 
 Retrieve detections
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -130,7 +131,7 @@ summary.total_objects_successful | numeric | | |
 
 Retrieve hosts based on a minimum certainty and threat score
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -167,7 +168,7 @@ summary.total_objects_successful | numeric | | |
 
 Retrieve hosts based on descriptive tags
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -202,7 +203,7 @@ summary.total_objects_successful | numeric | | |
 
 Query device on a known interval
 
-Type: **ingest** \
+Type: **ingest** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -217,7 +218,7 @@ ______________________________________________________________________
 
 Auto-generated Splunk SOAR Connector documentation.
 
-Copyright 2025 Splunk Inc.
+Copyright 2026 Splunk Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
