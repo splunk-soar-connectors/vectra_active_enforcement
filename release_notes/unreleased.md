@@ -1,1 +1,2 @@
 **Unreleased**
+* Secure outgoing Vectra API connections by verifying server certificates by default.

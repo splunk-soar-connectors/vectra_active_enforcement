@@ -9,14 +9,14 @@
     "product_name": "Vectra Active Enforcement",
     "product_version_regex": ".*",
     "publisher": "Vectra",
-    "license": "Copyright Vectra 2017-2025",
+    "license": "Copyright Vectra 2017-2026",
     "app_version": "4.0.1",
     "python_version": "3",
     "fips_compliant": false,
     "utctime_updated": "2025-04-14T18:56:24.275727Z",
     "package_name": "phantom_vectraactiveenforcement",
     "main_module": "vectraactiveenforcement_connector.py",
-    "min_phantom_version": "6.0.0",
+    "min_phantom_version": "6.3.0",
     "app_wizard_version": "1.0.0",
     "configuration": {
         "device": {
@@ -108,6 +108,12 @@
             "description": "Detection types (comma-separated)",
             "data_type": "string",
             "order": 14
+        },
+        "verify_server_cert": {
+            "description": "Verify server certificate",
+            "data_type": "boolean",
+            "default": true,
+            "order": 15
         }
     },
     "actions": [
@@ -657,5 +663,11 @@
             "output": [],
             "versions": "EQ(*)"
         }
-    ]
+    ],
+    "pip39_dependencies": {
+        "wheel": []
+    },
+    "pip313_dependencies": {
+        "wheel": []
+    }
 }
